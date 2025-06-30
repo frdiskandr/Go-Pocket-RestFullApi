@@ -5,9 +5,9 @@ import (
 )
 
 // HashPassword mengenkripsi password user
-func HashPassword(password string) (string, error) {
-	bytes, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
-	return string(bytes), err
+func HashPassword(password string) (string) {
+	bytes, _ := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	return string(bytes)
 }
 
 // CheckPassword membandingkan password input dengan hash di database
