@@ -5,6 +5,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/frdiskndr/Go-Pocket-RestFullApi/internal/config"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -13,6 +14,7 @@ func main() {
 	app := fiber.New(fiber.Config{
 		IdleTimeout: 1 * time.Minute,
 	})
+	config.Load()
 
 	//Middleware
 
