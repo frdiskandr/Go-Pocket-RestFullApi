@@ -1,6 +1,8 @@
 package validate
 
-import "github.com/go-playground/validator/v10"
+import (
+	"github.com/go-playground/validator/v10"
+)
 
 type ErrorResponse struct {
 	FailedField string
@@ -10,10 +12,10 @@ type ErrorResponse struct {
 
 var validate = validator.New()
 
-func IsValid(model *any) []*ErrorResponse {
+func IsValid(model any) []*ErrorResponse {
 	var errors []*ErrorResponse
-	err := validate.Struct(&model)
-	if err != nil {
+	if err := validate.Struct(model)
+	err != nil {
 		for _, err := range err.(validator.ValidationErrors) {
 			var element ErrorResponse
 			element.FailedField = err.Field()
