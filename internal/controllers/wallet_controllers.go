@@ -78,7 +78,7 @@ func (wc *WalletControllers) Topup(c *fiber.Ctx) error {
 		Type:         0, // type 0 for topup
 	}
 
-	go wc.db.Create(&transaction)
+	wc.db.Create(&transaction)
 
 	wc.db.First(&wallet, "user_id = ?", token.Id)
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
