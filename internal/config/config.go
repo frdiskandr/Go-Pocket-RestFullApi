@@ -2,11 +2,10 @@ package config
 
 import (
 	"log"
-	"os"
 
 	"github.com/frdiskndr/Go-Pocket-RestFullApi/internal/models"
 	"github.com/joho/godotenv"
-	"gorm.io/driver/postgres"
+	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
 
@@ -21,17 +20,14 @@ func Load() {
 	}
 
 	//databases con
-	var dsn string
-	status := os.Getenv("STATUS")
-	if status == "Production" {
-		dsn = os.Getenv("DsnProd")
-	} else {
-		dsn = os.Getenv("DsnLocal")
-	}
+	// status := os.Getenv("STATUS")
+	// if status == "Production" {
+	// 	dsn = os.Getenv("DsnProd")
+	// } else {
+	// 	dsn = os.Getenv("DsnLocal")
+	// }
 
-	db, err := gorm.Open(postgres.New(postgres.Config{
-		DSN: dsn,
-	}))
+	db, err := gorm.Open(sqlite.Open("./databases.db"), &gorm.Config{})
 
 	if err != nil {
 		log.Panicln("Databases Connection Err: ", err)
