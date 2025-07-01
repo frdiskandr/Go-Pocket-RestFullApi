@@ -15,7 +15,7 @@ var DB *gorm.DB
 
 func Load() {
 	// load env file
-	err := godotenv.Load("../../.env")
+	err := godotenv.Load(".env")
 	if err != nil {
 		log.Println("Load_Env Status Err: ", err)
 	}

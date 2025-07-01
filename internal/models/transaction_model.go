@@ -14,3 +14,4 @@ type Transaction struct {
 	Type         uint8 `json:"type"`
 	TimeStamp    time.Time 
 }
+

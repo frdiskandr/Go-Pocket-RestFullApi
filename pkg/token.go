@@ -13,15 +13,18 @@ var jwtSecret = []byte("your-secret-key") // ganti dengan secret yang aman
 type JwtClaims struct {
 	Id   uint
 	Name string
+	Email string
+	PhoneNumber string
 	jwt.RegisteredClaims
 }
 
 // CreateToken membuat JWT dengan expiry 1 jam
 func CreateToken(user *models.User) (string, error) {
-	fmt.Println(user.Name)
 	claims := JwtClaims{
 		Id:   user.ID,
 		Name: user.Name,
+		Email: user.Email,
+		PhoneNumber: user.PhoneNumber,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Hour * 24)),
 			Issuer:    "go-pocket",
