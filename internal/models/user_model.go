@@ -8,7 +8,7 @@ type User struct {
 	Email       string `json:"email" validate:"required"`
 	PhoneNumber string `json:"phoneNumber" validate:"required,max=30"`
 	Password    string `json:"password" validate:"required"`
-	// Wallet      *Wallet `gorm:"foreignKey:UserID; reference:ID"`
+	Wallet      *Wallet `gorm:"foreignKey:UserID; reference:ID"`
 }
 
 type UserLogin struct {
