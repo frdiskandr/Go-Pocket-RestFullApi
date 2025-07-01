@@ -9,16 +9,16 @@ type keyLocals interface{}
 var Token keyLocals
 
 func AuthMiddleware(c *fiber.Ctx) error{
-	token := c.Get("Authorization", "")
+	token := c.Get("token", "")
 	if(token == ""){
-		c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 			"Message": "Unauthorized",
 		})
 	}
 
 	validate, err := pkg.VerifyToken(token)
 	if err != nil {
-		c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 			"Message": "Unauthorized",
 			"Error": err,
 		})
