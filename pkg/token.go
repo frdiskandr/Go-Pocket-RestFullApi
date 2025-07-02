@@ -1,7 +1,7 @@
 package pkg
 
 import (
-	"fmt"
+	"errors"
 	"time"
 
 	"github.com/frdiskndr/Go-Pocket-RestFullApi/internal/models"
@@ -11,9 +11,9 @@ import (
 var jwtSecret = []byte("your-secret-key") // ganti dengan secret yang aman
 
 type JwtClaims struct {
-	Id   uint
-	Name string
-	Email string
+	Id          uint
+	Name        string
+	Email       string
 	PhoneNumber string
 	jwt.RegisteredClaims
 }
@@ -21,9 +21,9 @@ type JwtClaims struct {
 // CreateToken membuat JWT dengan expiry 1 jam
 func CreateToken(user *models.User) (string, error) {
 	claims := JwtClaims{
-		Id:   user.ID,
-		Name: user.Name,
-		Email: user.Email,
+		Id:          user.ID,
+		Name:        user.Name,
+		Email:       user.Email,
 		PhoneNumber: user.PhoneNumber,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Hour * 24)),
@@ -48,10 +48,8 @@ func VerifyToken(tokenString string) (*JwtClaims, error) {
 	}
 
 	if !token.Valid {
-		return nil, fmt.Errorf("invalid token")
+		return nil, errors.New("invalid token")
 	}
 
 	return claims, nil
 }
-
-
