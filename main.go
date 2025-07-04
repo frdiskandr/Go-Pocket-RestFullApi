@@ -19,7 +19,7 @@ func main() {
 	config.Load()
 
 	//Middleware
-	app.Use(cors.New(cors.Config{}))
+	app.Use(cors.New())
 
 	//Routes
 	v1 := app.Group("/api/v1")

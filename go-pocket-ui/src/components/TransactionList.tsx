@@ -28,6 +28,7 @@ export default function TransactionList() {
         const sent = response.data["Data Send"] || [];
         const received = response.data["Data Recipient"] || [];
         const all = [...sent, ...received].sort((a, b) => new Date(b.TimeStamp).getTime() - new Date(a.TimeStamp).getTime());
+        console.log([all])
         setTransactions(all.slice(0, 5)); // Ambil 5 transaksi terakhir
       } catch (error) {
         console.error("Failed to fetch history", error);
