@@ -9,6 +9,7 @@ import (
 	"github.com/frdiskndr/Go-Pocket-RestFullApi/internal/routes"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/swagger"
 )
 
 func main() {
@@ -24,6 +25,14 @@ func main() {
 	//Routes
 	v1 := app.Group("/api/v1")
 	routes.Index(v1)
+
+	app.Static("/", "./public")
+
+	app.Get("/documentation/*", swagger.New(swagger.Config{
+		URL:          "/swagger.json", // The url to the API spec
+		DeepLinking:  false,
+		DocExpansion: "none",
+	}))
 
 	//Server Start
 	PORT := os.Getenv("PORT")
