@@ -157,15 +157,15 @@ func (wc *WalletControllers) Transfer(c *fiber.Ctx) error {
 func (wc *WalletControllers) History(c *fiber.Ctx) error {
 	token := c.Locals(middleware.Token).(*pkg.JwtClaims)
 
-	var sendHistory = models.Transaction{}
-	var recipientHistory = models.Transaction{}
+	var sendHistory []models.Transaction
+	var recipientHistory []models.Transaction
 
-	wc.db.Where("from_wallet_id = ?", &token.Id).Find(&sendHistory)
-	wc.db.Where("to_wallet_id = ?", &token.Id).Find(&recipientHistory)
+	wc.db.Order("created_at desc").Where("from_wallet_id = ?", token.Id).Find(&sendHistory)
+	wc.db.Order("created_at desc").Where("to_wallet_id = ?", token.Id).Find(&recipientHistory)
 
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"message":        "StatusOK!",
-		"Data Send":      sendHistory,
-		"Data Recipient": recipientHistory,
+		"DataSend":      sendHistory,
+		"DataRecipient": recipientHistory,
 	})
 }
