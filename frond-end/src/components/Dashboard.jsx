@@ -90,7 +90,7 @@ const Dashboard = () => {
                 >
                     <div>
                         <p className="text-gray-400">Welcome back,</p>
-                        <h1 className="text-2xl font-bold">{user?.username}</h1>
+                        <h1 className="text-2xl font-bold">{user?.name}</h1>
                     </div>
                     <div className="flex items-center gap-4">
                         <button onClick={() => navigate('/profile')} className="p-2 rounded-full bg-gray-800 hover:bg-blue-500 transition-colors">
