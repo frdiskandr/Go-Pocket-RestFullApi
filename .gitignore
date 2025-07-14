@@ -1,5 +1,7 @@
-/tmp
+./tmp
 */dist
 /node_modules
 *node_modules
 *.exe
+*/tmp
+/*tmp
